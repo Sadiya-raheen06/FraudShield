@@ -12,16 +12,33 @@ st.set_page_config(
 # NAVY BLUE DESIGN
 st.markdown("""
 <style>
+
 .stApp {
     background-color: #071A35;
     color: white;
 }
+
+[data-testid="stSidebar"] {
+    background-color: #102B50;
+}
+
+[data-testid="stSidebar"] * {
+    color: white !important;
+    opacity: 1 !important;
+}
+
 h1, h2, h3, p, label {
     color: white !important;
 }
-.stButton>button {
+
+.stButton button {
     background-color: #1769AA;
     color: white;
+    border-radius: 10px;
+}
+
+</style>
+""", unsafe_allow_html=True)
     border-radius: 10px;
     border: none;
 }
