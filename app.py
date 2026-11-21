@@ -9,13 +9,9 @@ st.set_page_config(
     layout="wide"
 )
 
-# NAVY BLUE DESIGN
+# NAVY BLUE THEME
 st.markdown("""
 <style>
-
-st.markdown("""
-<style>
-
 .stApp {
     background-color: #071A35;
     color: #FFFFFF;
@@ -45,28 +41,9 @@ div[data-testid="stMetric"] {
     color: white;
     border-radius: 10px;
 }
-
 </style>
 """, unsafe_allow_html=True)
 
-.stButton button {
-    background-color: #1769AA;
-    color: white;
-    border-radius: 10px;
-}
-
-</style>
-""", unsafe_allow_html=True)
-    border-radius: 10px;
-    border: none;
-}
-div[data-testid="stMetric"] {
-    background-color: #102B50;
-    padding: 18px;
-    border-radius: 12px;
-}
-</style>
-""", unsafe_allow_html=True)
 
 # SIDEBAR
 st.sidebar.title("🛡️ FraudShield")
@@ -84,7 +61,8 @@ page = st.sidebar.radio(
     ]
 )
 
-# DEMONSTRATION DATA
+
+# SAMPLE DATA
 np.random.seed(42)
 
 df = pd.DataFrame({
@@ -94,8 +72,10 @@ df = pd.DataFrame({
     "New Device": np.random.randint(0, 2, 200)
 })
 
-# DEMONSTRATION RISK SCORING
+
+# RISK CALCULATION
 def calculate_risk(amount, hour, failed, device):
+
     score = 0
 
     if amount > 30000:
@@ -120,28 +100,23 @@ if page == "Home Dashboard":
     st.subheader("Cyber Fraud Detection System")
 
     st.write(
-        "An educational application demonstrating "
-        "how data analysis can help identify "
-        "potentially suspicious transactions."
+        "An educational application for analysing "
+        "potentially suspicious financial transactions."
     )
 
-    st.info(
-        "This version uses demonstration data and "
-        "illustrative risk rules."
-    )
+    st.info("Welcome to FraudShield!")
 
-    c1, c2, c3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
-    c1.metric("Sample Transactions", "200")
-    c2.metric("Project Period", "2022–2024")
-    c3.metric("Detection System", "Prototype")
+    col1.metric("Sample Transactions", "200")
+    col2.metric("Project Period", "2022–2024")
+    col3.metric("System", "Prototype")
 
     st.subheader("Project Overview")
 
     st.write("""
-    FraudShield demonstrates how Python, data analysis
-    and machine learning techniques can support
-    financial fraud detection.
+    FraudShield demonstrates how data analysis
+    and machine learning can support cyber fraud detection.
     """)
 
 
@@ -149,8 +124,6 @@ if page == "Home Dashboard":
 elif page == "Fraud Detection":
 
     st.title("🔍 Fraud Detection")
-
-    st.write("Enter transaction details below.")
 
     amount = st.number_input(
         "Transaction Amount (₹)",
@@ -178,8 +151,6 @@ elif page == "Fraud Detection":
             amount, hour, failed, device
         )
 
-        st.subheader("Analysis Result")
-
         st.metric("Illustrative Risk Score", f"{score}/100")
 
         if score >= 60:
@@ -190,7 +161,7 @@ elif page == "Fraud Detection":
             st.success("Low Risk – No Major Warning Signs")
 
         st.caption(
-            "This is a rule-based educational demonstration, "
+            "Educational rule-based demonstration, "
             "not a confirmed fraud decision."
         )
 
@@ -198,7 +169,7 @@ elif page == "Fraud Detection":
 # BATCH DETECTION
 elif page == "Batch Detection":
 
-    st.title("📁 Batch Transaction Analysis")
+    st.title("📁 Batch Detection")
 
     file = st.file_uploader(
         "Upload transaction CSV",
@@ -215,7 +186,7 @@ elif page == "Batch Detection":
         st.write("Total Records:", len(data))
 
         st.download_button(
-            "Download Original CSV",
+            "Download CSV",
             data=data.to_csv(index=False),
             file_name="transactions.csv",
             mime="text/csv"
@@ -227,32 +198,20 @@ elif page == "Data Analysis":
 
     st.title("📊 Data Analysis")
 
-    st.info(
-        "These charts use randomly generated demonstration "
-        "transactions, not official fraud statistics."
-    )
-
-    st.subheader("Transaction Amount Distribution")
+    st.info("Sample demonstration data")
 
     fig, ax = plt.subplots()
 
-    ax.hist(
-        df["Transaction Amount"],
-        bins=15
-    )
+    ax.hist(df["Transaction Amount"], bins=15)
 
     ax.set_xlabel("Transaction Amount")
     ax.set_ylabel("Number of Transactions")
 
+    fig.patch.set_facecolor("#FFFFFF")
+
     st.pyplot(fig)
 
-    st.subheader("Transactions by Hour")
-
-    hourly = df["Transaction Hour"].value_counts().sort_index()
-
-    st.bar_chart(hourly)
-
-    st.subheader("Dataset Preview")
+    st.subheader("Transaction Dataset")
 
     st.dataframe(df.head(10))
 
@@ -264,22 +223,17 @@ elif page == "Fraud Trends":
 
     st.write("Reporting period: 2022–2024")
 
-    st.info("""
-    Official statistics will be added here after
-    verifying the NCRB, MHA, I4C and CERT-In reports.
+    st.info(
+        "Verified official statistics will be added "
+        "after checking the relevant government reports."
+    )
 
-    Different sources report different indicators.
-    They will be displayed separately.
-    """)
+    st.write("Data sources:")
 
-    st.write("Sources to be used:")
-
-    st.markdown("""
-    - NCRB – Crime in India
-    - Ministry of Home Affairs (MHA)
-    - Indian Cyber Crime Coordination Centre (I4C)
-    - CERT-In
-    """)
+    st.write("- NCRB")
+    st.write("- Ministry of Home Affairs")
+    st.write("- I4C")
+    st.write("- CERT-In")
 
 
 # SAFETY TIPS
@@ -291,7 +245,7 @@ elif page == "Safety Tips":
         "Never share your OTP.",
         "Never share your UPI PIN.",
         "Avoid unknown payment links.",
-        "Do not download unknown APK files.",
+        "Do not install unknown APK files.",
         "Use strong passwords.",
         "Enable two-factor authentication.",
         "Verify payment requests.",
@@ -301,11 +255,7 @@ elif page == "Safety Tips":
     for tip in tips:
         st.success("✔ " + tip)
 
-    st.subheader("Indian Cybercrime Helpline")
-
-    st.header("1930")
-
-    st.write("Official reporting portal: https://cybercrime.gov.in/")
+    st.header("Cybercrime Helpline: 1930")
 
 
 # ABOUT PROJECT
@@ -317,30 +267,25 @@ elif page == "About Project":
 
     st.write("""
     To demonstrate how data analysis and machine learning
-    can help identify potentially suspicious financial
-    transaction patterns.
+    can help identify potentially suspicious
+    financial transaction patterns.
     """)
 
     st.subheader("Technologies Used")
 
     st.write("""
-    - Python
-    - NumPy
-    - Pandas
-    - Matplotlib
-    - Streamlit
-    - Machine Learning (planned integration)
+    Python, NumPy, Pandas, Matplotlib,
+    Streamlit and Scikit-learn.
     """)
 
     st.subheader("Project Period")
-
     st.write("2022–2024")
 
     st.subheader("Future Scope")
 
     st.write("""
     - Machine learning integration
-    - Improved fraud prediction
-    - Real-time transaction monitoring
+    - Real-time fraud monitoring
     - Advanced data visualisation
+    - Improved fraud prediction
     """)
