@@ -13,9 +13,12 @@ st.set_page_config(
 st.markdown("""
 <style>
 
+st.markdown("""
+<style>
+
 .stApp {
     background-color: #071A35;
-    color: white;
+    color: #FFFFFF;
 }
 
 [data-testid="stSidebar"] {
@@ -23,13 +26,28 @@ st.markdown("""
 }
 
 [data-testid="stSidebar"] * {
-    color: white !important;
-    opacity: 1 !important;
+    color: #FFFFFF !important;
 }
 
 h1, h2, h3, p, label {
-    color: white !important;
+    color: #FFFFFF !important;
 }
+
+div[data-testid="stMetric"] {
+    background-color: #163B65;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #2878B8;
+}
+
+.stButton button {
+    background-color: #1769AA;
+    color: white;
+    border-radius: 10px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 .stButton button {
     background-color: #1769AA;
